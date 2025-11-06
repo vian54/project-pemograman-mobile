@@ -49,32 +49,38 @@ class _HomePageState extends State<HomePage> {
                   // logo + text block on left
                   Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          galleryAsset1,
-                          width: 64,
-                          height: 64,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                              width: 64, height: 64, color: Colors.white24),
+                      // ubah ukuran logo di header
+                      Container(
+                        width: 88, // <= ubah lebar kotak logo
+                        height: 88, // <= ubah tinggi kotak logo
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.only(right: 12, top: 2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.asset(
+                            galleryAsset1,
+                            width: 72, // <= ubah ukuran gambar di dalam kotak
+                            height: 72, // <= ubah ukuran gambar di dalam kotak
+                            fit: BoxFit.contain, // contain prevents cropping
+                            errorBuilder: (_, __, ___) => Container(
+                                width: 60, height: 60, color: Colors.white24),
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Text('DEPARTEMEN SEJARAH',
+                          Text('INFORMATIKA',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold)),
                           SizedBox(height: 4),
-                          Text('FAKULTAS ILMU BUDAYA',
+                          Text('FAKULTAS SAINS DAN TEKNOLOG',
                               style: TextStyle(
                                   color: Colors.white70, fontSize: 12)),
-                          Text('UNIVERSITAS GADJAH MADA',
+                          Text('UNIVERSITAS MUAHMMADIYAH SIDOARJO',
                               style: TextStyle(
                                   color: Colors.white70, fontSize: 12)),
                         ],
@@ -317,37 +323,38 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
+                    // ubah ukuran thumbnail galeri di sini
                     ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(galleryAsset1,
                             width: 300,
-                            height: 120,
+                            height: 130,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) => Container(
                                 width: 300,
-                                height: 120,
+                                height: 130,
                                 color: Colors.grey[200]))),
                     const SizedBox(width: 12),
                     ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(galleryAsset2,
-                            width: 300,
-                            height: 120,
+                            width: 260,
+                            height: 110,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) => Container(
-                                width: 300,
-                                height: 120,
+                                width: 260,
+                                height: 110,
                                 color: Colors.grey[200]))),
                     const SizedBox(width: 12),
                     ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(galleryAsset3,
-                            width: 300,
-                            height: 120,
+                            width: 260,
+                            height: 110,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) => Container(
-                                width: 300,
-                                height: 120,
+                                width: 260,
+                                height: 110,
                                 color: Colors.grey[200]))),
                   ],
                 ),

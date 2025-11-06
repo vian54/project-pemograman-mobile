@@ -45,50 +45,120 @@ class _FooterState extends State<Footer> with SingleTickerProviderStateMixin {
               // left: mascot + basic address
               SizedBox(
                 width: 260,
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      mascot,
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(Icons.account_circle, size: 120, color: Colors.white70),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text('UMSIDA\nFakultas Sains dan Teknologi', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Kampus 2 Universitas Muhammadiyah Sidoarjo\nJl. Raya Gelam No.250, Pagerwaja, Gelam, Kec. Candi',
-                    style: TextStyle(fontSize: 12, color: Colors.white70),
-                  ),
-                ]),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // safe container so image won't be cropped; use contain to preserve aspect
+                      Container(
+                        width: 120, // <= sesuaikan jadi lebih besar/kecil
+                        height: 120, // <= sesuaikan jadi lebih besar/kecil
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.asset(
+                            mascot,
+                            width: 120, // <= sesuaikan
+                            height: 120, // <= sesuaikan
+                            fit: BoxFit
+                                .contain, // contain prevents cropping and preserves aspect
+                            errorBuilder: (_, __, ___) => const Icon(
+                                Icons.account_circle,
+                                size: 60,
+                                color: Colors.white70),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text('UMSIDA\nFakultas Sains dan Teknologi',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Kampus 2 Universitas Muhammadiyah Sidoarjo\nJl. Raya Gelam No.250, Pagerwaja, Gelam, Kec. Candi',
+                        style: TextStyle(fontSize: 12, color: Colors.white70),
+                      ),
+                    ]),
               ),
 
               const SizedBox(width: 40),
 
               // middle: Direktorat
               Expanded(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const Text('Direktorat', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                  const SizedBox(height: 12),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Akademik'))),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Keuangan'))),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Kemahasiswaan dan Alumni'))),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Pengembangan SDM'))),
-                ]),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Direktorat',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                      const SizedBox(height: 12),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Akademik'))),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Keuangan'))),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Kemahasiswaan dan Alumni'))),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Pengembangan SDM'))),
+                    ]),
               ),
 
               // right: Badan dan Lembaga
               Expanded(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const Text('Badan dan Lembaga', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                  const SizedBox(height: 12),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Badan Penjamin Mutu'))),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Lembaga Kerjasama dan Urusan Internasional'))),
-                  TextButton(onPressed: () {}, style: TextButton.styleFrom(foregroundColor: Colors.white70), child: const Align(alignment: Alignment.centerLeft, child: Text('Lembaga Bahasa'))),
-                ]),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Badan dan Lembaga',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                      const SizedBox(height: 12),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Badan Penjamin Mutu'))),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                  'Lembaga Kerjasama dan Urusan Internasional'))),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white70),
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lembaga Bahasa'))),
+                    ]),
               ),
             ]),
           ),
@@ -101,7 +171,8 @@ class _FooterState extends State<Footer> with SingleTickerProviderStateMixin {
         child: Container(
           width: double.infinity,
           color: const Color(0xFF144A63), // samakan dengan header/appbar
-          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24).copyWith(right: 100),
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24)
+              .copyWith(right: 100),
           child: Row(
             children: [
               const Expanded(

@@ -38,11 +38,11 @@ class NewsItem extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(imageAsset,
-                    width: 120,
-                    height: 80,
+                    width: 140,
+                    height: 90,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
-                        width: 120, height: 80, color: Colors.grey[200]))),
+                        width: 140, height: 90, color: Colors.grey[200]))),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
