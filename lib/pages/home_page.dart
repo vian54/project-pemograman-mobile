@@ -3,6 +3,8 @@ import '../data/dummy_data.dart';
 import '../widgets/news_item.dart';
 import '../widgets/agenda_item.dart';
 import '../widgets/footer.dart';
+import 'agenda_page.dart';
+import 'academic_info_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -79,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Text(
-                            'UNIVERSITAS MUAHMMADIYAH SIDOARJO',
+                            'UNIVERSITAS MUHAMMADIYAH SIDOARJO',
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
@@ -253,7 +255,15 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(height: 8),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            // Nanti bisa dibuat halaman news list lengkap
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Halaman daftar berita akan segera tersedia'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          },
           child: const Text('Lihat Semua Berita'),
         ),
       ],
@@ -294,7 +304,11 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) => AgendaItem(event: allEvents[index]),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const AgendaPage()),
+              );
+            },
             child: const Text('Lihat Semua Agenda'),
           ),
         ],
@@ -354,7 +368,11 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(height: 8),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const AcademicInfoPage()),
+            );
+          },
           child: const Text('Lihat Semua Informasi'),
         ),
       ],
