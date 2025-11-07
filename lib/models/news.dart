@@ -4,7 +4,7 @@ class News {
   final String summary;
   final String content;
   final String date;
-  final String imageUrl;
+  final String imageAsset;
 
   News({
     required this.id,
@@ -12,6 +12,6 @@ class News {
     required this.summary,
     required this.content,
     required this.date,
-    required this.imageUrl,
+    required this.imageAsset,
   });
 }

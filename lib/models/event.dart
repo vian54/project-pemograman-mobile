@@ -1,14 +1,16 @@
-class EventItem {
+class Event {
   final String id;
   final String title;
-  final String date;
+  final String day;
+  final String month;
   final String location;
   final String description;
 
-  EventItem({
+  Event({
     required this.id,
     required this.title,
-    required this.date,
+    required this.day,
+    required this.month,
     required this.location,
     required this.description,
   });

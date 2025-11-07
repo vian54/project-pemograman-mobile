@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../data/dummy_data.dart';
 import '../widgets/news_item.dart';
 import '../widgets/agenda_item.dart';
 import '../widgets/footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -13,104 +15,106 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
   void _incrementCounter() => setState(() => _counter++);
 
-  // asset paths (ensure files exist in assets/images/)
-  static const headerAsset = 'assets/images/header.jpg';
-  static const newsAsset1 = 'assets/images/news1.jpg';
-  static const newsAsset2 = 'assets/images/news2.jpg';
-  static const newsAsset3 = 'assets/images/news3.jpg';
+  // Asset paths
   static const galleryAsset1 = 'assets/images/gal1.jpg';
   static const galleryAsset2 = 'assets/images/gal2.jpg';
   static const galleryAsset3 = 'assets/images/gal3.jpg';
 
   @override
   Widget build(BuildContext context) {
-    // sample data for "Informasi Akademik"
-    final academicInfo = [
-      'Pendaftaran Yudisium S1 Mulai November 2025',
-      'Jadwal Kuliah Program Magister TA 2025/2026',
-      'Ralat Pengumuman Pendaftaran Ulang Mahasiswa Semester Gasal T.A. 2025/2026',
-      'Tradisi Brandu dalam Kacamata Antropologi Kesehatan',
-      'Jejak Keilmuan dan Kebudayaan yang Menginspirasi',
-    ];
-
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      // custom header to match provided screenshot: dark bar, logo + multiline text at left, menu at right
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(96),
         child: Container(
-          color: const Color(0xFF0D3E57), // dark blue similar to screenshot
+          color: const Color(0xFF0D3E57),
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // logo + text block on left
+                  // Logo + Text
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      // ubah ukuran logo di header
                       Container(
-                        width: 88, // <= ubah lebar kotak logo
-                        height: 88, // <= ubah tinggi kotak logo
+                        width: 88,
+                        height: 88,
                         padding: const EdgeInsets.all(8),
                         margin: const EdgeInsets.only(right: 12, top: 2),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(6),
                           child: Image.asset(
                             galleryAsset1,
-                            width: 72, // <= ubah ukuran gambar di dalam kotak
-                            height: 72, // <= ubah ukuran gambar di dalam kotak
-                            fit: BoxFit.contain, // contain prevents cropping
+                            width: 72,
+                            height: 72,
+                            fit: BoxFit.contain,
                             errorBuilder: (_, __, ___) => Container(
-                                width: 60, height: 60, color: Colors.white24),
+                              width: 80,
+                              height: 80,
+                              color: Colors.white24,
+                            ),
                           ),
                         ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: const [
-                          Text('INFORMATIKA',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            'INFORMATIKA',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           SizedBox(height: 4),
-                          Text('FAKULTAS SAINS DAN TEKNOLOG',
-                              style: TextStyle(
-                                  color: Colors.white70, fontSize: 12)),
-                          Text('UNIVERSITAS MUAHMMADIYAH SIDOARJO',
-                              style: TextStyle(
-                                  color: Colors.white70, fontSize: 12)),
+                          Text(
+                            'FAKULTAS SAINS DAN TEKNOLOGI',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            'UNIVERSITAS MUAHMMADIYAH SIDOARJO',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                   const Spacer(),
-                  // menu (scrollable horizontally if viewport small)
+                  // Menu
                   Flexible(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // BERANDA with underline
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               TextButton(
                                 onPressed: () {},
-                                child: const Text('BERANDA',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
+                                child: const Text(
+                                  'BERANDA',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                               Container(
-                                  height: 3,
-                                  width: 56,
-                                  color: const Color(
-                                      0xFFFFC107)), // yellow underline
+                                height: 3,
+                                width: 56,
+                                color: const Color(0xFFFFC107),
+                              ),
                             ],
                           ),
                           const SizedBox(width: 12),
@@ -143,232 +147,217 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          // header: removed image/gradient background — keep blank/transparent block to preserve spacing
-          Container(
-            height: 220,
-            width: double.infinity,
-            color: Colors.transparent,
-          ),
-
-          // three-column area
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
-            child: LayoutBuilder(builder: (context, constraints) {
-              final isWide = constraints.maxWidth > 1000;
-              return Flex(
-                direction: isWide ? Axis.horizontal : Axis.vertical,
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            // Three-column area
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isWide = constraints.maxWidth > 1000;
+                  
+                  if (isWide) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex: 4, child: _buildNewsSection()),
+                        const SizedBox(width: 32),
+                        Expanded(flex: 3, child: _buildAgendaSection()),
+                        const SizedBox(width: 32),
+                        Expanded(flex: 3, child: _buildAcademicSection()),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildNewsSection(),
+                        const SizedBox(height: 20),
+                        _buildAgendaSection(),
+                        const SizedBox(height: 20),
+                        _buildAcademicSection(),
+                      ],
+                    );
+                  }
+                },
+              ),
+            ),
+            // Gallery
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Left: Berita (takes ~40%)
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: const [
-                            Text('Berita',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            SizedBox(width: 8),
-                            Expanded(child: Divider(thickness: 1)),
-                          ]),
-                          const SizedBox(height: 12),
-                          // multiple NewsItem with divider between
-                          NewsItem(
-                            imageAsset: newsAsset1,
-                            title:
-                                'Peluncuran Buku dan Diskusi Akademik "Nusakambangan Luar Dalam"',
-                            date: '01 November 2025',
-                            excerpt:
-                                'Peluncuran Buku dan Diskusi Akademik mengenai ...',
-                            fullContent: 'Isi lengkap berita 1 ...',
-                          ),
-                          const Divider(),
-                          NewsItem(
-                            imageAsset: newsAsset2,
-                            title:
-                                'Peluncuran Website Program Penelitian "New Futures for Indonesian Objects"',
-                            date: '24 Oktober 2025',
-                            excerpt:
-                                'Website baru untuk program penelitian ...',
-                            fullContent: 'Isi lengkap berita 2 ...',
-                          ),
-                          const Divider(),
-                          NewsItem(
-                            imageAsset: newsAsset3,
-                            title:
-                                'Studi Wawasan "Bahasa dan Ciri Khas Kolonialisme Belanda di Nusantara"',
-                            date: '20 Oktober 2025',
-                            excerpt: 'Ringkasan studi wawasan ...',
-                            fullContent: 'Isi lengkap berita 3 ...',
-                          ),
-                          const SizedBox(height: 8),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Text('Lihat Semua Berita'))
-                        ]),
-                  ),
-
-                  SizedBox(width: isWide ? 32 : 0, height: isWide ? 0 : 20),
-
-                  // Middle: Agenda (takes ~30%)
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.shade200),
-                      ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(children: const [
-                              Text('Agenda',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(width: 8),
-                              Expanded(child: Divider(thickness: 1)),
-                            ]),
-                            const SizedBox(height: 12),
-                            // sample agenda items
-                            AgendaItem(
-                                day: '27',
-                                month: 'Okt',
-                                title:
-                                    'Nusakambangan Luar Dalam: Strategi pengendalian...',
-                                place: ''),
-                            AgendaItem(
-                                day: '25',
-                                month: 'Feb',
-                                title:
-                                    'Consuming the Rijsttafel: Representations of Shared...',
-                                place: ''),
-                            AgendaItem(
-                                day: '14',
-                                month: 'Feb',
-                                title:
-                                    'Sejarah Kebijakan Pendidikan Dokter Umum & Spesialis...',
-                                place: ''),
-                            AgendaItem(
-                                day: '13',
-                                month: 'Feb',
-                                title:
-                                    'Beyond the Point of No Return: The Re-Emergence...',
-                                place: ''),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('Lihat Semua Agenda'))
-                          ]),
+                  const Text(
+                    'Galeri',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-
-                  SizedBox(width: isWide ? 32 : 0, height: isWide ? 0 : 20),
-
-                  // Right: Informasi Akademik (takes ~30%)
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: const [
-                            Text('Informasi Akademik',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            SizedBox(width: 8),
-                            Expanded(child: Divider(thickness: 1)),
-                          ]),
-                          const SizedBox(height: 12),
-                          // list of academic info
-                          ...academicInfo.map((s) => Column(children: [
-                                ListTile(
-                                  contentPadding: EdgeInsets.zero,
-                                  title: Text(s,
-                                      style: const TextStyle(
-                                          fontSize: 14, height: 1.2)),
-                                  subtitle: Text('Oktober 16, 2025',
-                                      style: TextStyle(
-                                          fontSize: 11,
-                                          color: Colors.grey[600])),
-                                  dense: true,
-                                  horizontalTitleGap: 8,
-                                  minVerticalPadding: 8,
-                                ),
-                                const Divider(),
-                              ])),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Text('Lihat Semua Informasi'))
-                        ]),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 120,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _GalleryItem(asset: galleryAsset1, width: 300),
+                        const SizedBox(width: 12),
+                        _GalleryItem(asset: galleryAsset2, width: 260),
+                        const SizedBox(width: 12),
+                        _GalleryItem(asset: galleryAsset3, width: 260),
+                      ],
+                    ),
                   ),
+                  const SizedBox(height: 32),
                 ],
-              );
-            }),
-          ),
+              ),
+            ),
+            const Footer(),
+            // Hidden counter for testing
+            Offstage(child: Text('$_counter')),
+          ],
+        ),
+      ),
+    );
+  }
 
-          // Gallery + footer etc (existing)
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text('Galeri',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 120,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    // ubah ukuran thumbnail galeri di sini
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(galleryAsset1,
-                            width: 300,
-                            height: 130,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Container(
-                                width: 300,
-                                height: 130,
-                                color: Colors.grey[200]))),
-                    const SizedBox(width: 12),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(galleryAsset2,
-                            width: 260,
-                            height: 110,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Container(
-                                width: 260,
-                                height: 110,
-                                color: Colors.grey[200]))),
-                    const SizedBox(width: 12),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(galleryAsset3,
-                            width: 260,
-                            height: 110,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Container(
-                                width: 260,
-                                height: 110,
-                                color: Colors.grey[200]))),
-                  ],
+  Widget _buildNewsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: const [
+            Text(
+              'Berita',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(child: Divider(thickness: 1)),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // News items from dummy_data
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: allNews.length,
+          separatorBuilder: (_, __) => const Divider(),
+          itemBuilder: (context, index) => NewsItem(news: allNews[index]),
+        ),
+        const SizedBox(height: 8),
+        TextButton(
+          onPressed: () {},
+          child: const Text('Lihat Semua Berita'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAgendaSection() {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: const [
+              Text(
+                'Agenda',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 32),
-            ]),
+              SizedBox(width: 8),
+              Expanded(child: Divider(thickness: 1)),
+            ],
           ),
-
-          const Footer(),
-
-          // hidden counter for widget_test
-          Offstage(child: Text('$_counter')),
-        ]),
+          const SizedBox(height: 12),
+          // Agenda items from dummy_data
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: allEvents.length,
+            itemBuilder: (context, index) => AgendaItem(event: allEvents[index]),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text('Lihat Semua Agenda'),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildAcademicSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: const [
+            Text(
+              'Informasi Akademik',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(child: Divider(thickness: 1)),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Academic info from dummy_data
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: academicInfo.length,
+          separatorBuilder: (_, __) => const Divider(),
+          itemBuilder: (context, index) {
+            final info = academicInfo[index];
+            return ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                info['title']!,
+                style: const TextStyle(
+                  fontSize: 14,
+                  height: 1.2,
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  info['date']!,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ),
+              dense: true,
+            );
+          },
+        ),
+        const SizedBox(height: 8),
+        TextButton(
+          onPressed: () {},
+          child: const Text('Lihat Semua Informasi'),
+        ),
+      ],
     );
   }
 }
@@ -376,6 +365,7 @@ class _HomePageState extends State<HomePage> {
 class _NavItem extends StatelessWidget {
   final String label;
   final bool hasDropdown;
+  
   const _NavItem({required this.label, this.hasDropdown = false});
 
   @override
@@ -385,11 +375,39 @@ class _NavItem extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {},
-          child: Text(label, style: const TextStyle(color: Colors.white)),
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
         if (hasDropdown)
           const Icon(Icons.arrow_drop_down, color: Colors.white, size: 18),
       ],
+    );
+  }
+}
+
+class _GalleryItem extends StatelessWidget {
+  final String asset;
+  final double width;
+  
+  const _GalleryItem({required this.asset, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        asset,
+        width: width,
+        height: 130,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => Container(
+          width: width,
+          height: 130,
+          color: Colors.grey[200],
+        ),
+      ),
     );
   }
 }
